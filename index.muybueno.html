@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Evaluación Profesional</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    display:flex;
+    height:100vh;
+    background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 1400% 1400%;
+    animation: arcoiris 15s ease infinite;
+}
+
+@keyframes arcoiris {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* IZQUIERDA */
+.sidebar{
+    width:220px;
+    background: rgba(0,0,0,0.7);
+    color:white;
+    padding:15px;
+    backdrop-filter: blur(8px);
+}
+
+.sidebar h2{
+    text-align:center;
+}
+
+.sidebar button{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:none;
+    border-radius:10px;
+    background: linear-gradient(45deg,#ff6a00,#ee0979);
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.sidebar button:hover{
+    transform:scale(1.05);
+}
+
+/* CENTRO */
+.main{
+    flex:2;
+    padding:20px;
+}
+
+/* TARJETAS */
+.card{
+    background: rgba(255,255,255,0.9);
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+}
+
+/* DERECHA */
+.visual{
+    flex:1;
+    background: rgba(255,255,255,0.3);
+    padding:20px;
+    text-align:center;
+    backdrop-filter: blur(10px);
+}
+
+/* FIGURA */
+.rect{
+    background: linear-gradient(45deg,#ff6a00,#ee0979);
+    border-radius:8px;
+    animation: crecer 0.5s ease;
+}
+
+@keyframes crecer{
+    from{transform:scale(0);}
+    to{transform:scale(1);}
+}
+
+/* IMÁGENES */
+.img{
+    width:120px;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- IZQUIERDA -->
+<div class="sidebar">
+<h2>🌈 MENÚ</h2>
+
+<button onclick="mostrar('p1')">Pregunta 1</button>
+<button onclick="mostrar('p2')">Pregunta 2</button>
+<button onclick="mostrar('p3')">Pregunta 3</button>
+</div>
+
+<!-- CENTRO -->
+<div class="main">
+
+<!-- P1 -->
+<div id="p1" class="section active">
+<div class="card">
+<h3>📐 Pregunta 1: Área de un rectángulo</h3>
+
+Base: <input type="number" id="base"><br><br>
+Altura: <input type="number" id="altura"><br><br>
+
+<button onclick="area()">Calcular</button>
+
+<p id="r1"></p>
+</div>
+</div>
+
+<!-- P2 -->
+<div id="p2" class="section">
+<div class="card">
+<h3>🔢 Pregunta 2: Número y promedio</h3>
+
+<input type="number" id="num" placeholder="Número"><br><br>
+<button onclick="numero()">Verificar número</button>
+
+<p id="r2"></p>
+
+<hr>
+
+<input type="number" id="prom" placeholder="Promedio"><br><br>
+<button onclick="promedio()">Evaluar promedio</button>
+
+<p id="r3"></p>
+</div>
+</div>
+
+<!-- P3 -->
+<div id="p3" class="section">
+<div class="card">
+<h3>🧠 Pregunta 3: Ejercicios</h3>
+
+Edad: <input type="number" id="edad"><br>
+<button onclick="edadF()">Verificar</button>
+<p id="r4"></p>
+
+<hr>
+
+Nota: <input type="number" id="nota"><br>
+<button onclick="notaF()">Evaluar</button>
+<p id="r5"></p>
+
+<hr>
+
+Mes: <input type="number" id="mes"><br>
+<button onclick="mesF()">Mostrar</button>
+<p id="r6"></p>
+
+<hr>
+
+<input type="number" id="n1">
+<input type="number" id="n2">
+<input type="text" id="op" placeholder="+ - * /">
+<button onclick="calc()">Calcular</button>
+<p id="r7"></p>
+
+<hr>
+
+Año: <input type="number" id="anio"><br>
+<button onclick="bisiesto()">Verificar</button>
+<p id="r8"></p>
+
+</div>
+</div>
+
+</div>
+
+<!-- DERECHA -->
+<div class="visual">
+<h3>🌟 Visualización dinámica</h3>
+<div id="vista"></div>
+</div>
+
+<script>
+function mostrar(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById("vista").innerHTML="";
+}
+
+/* P1 */
+function area(){
+    let b=base.value;
+    let h=altura.value;
+
+    r1.innerText="Área: "+(b*h);
+
+    let v=document.getElementById("vista");
+    v.innerHTML="";
+
+    let rect=document.createElement("div");
+    rect.className="rect";
+    rect.style.width=(b*10)+"px";
+    rect.style.height=(h*10)+"px";
+
+    v.appendChild(rect);
+
+    v.innerHTML += `
+    <h3>🌈 Área calculada</h3>
+    <p>Dimensión: ${b} x ${h}</p>
+    <img class="img" src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif">
+    `;
+}
+
+/* P2 */
+function numero(){
+    let n=num.value;
+    let r=(n>0)?"Positivo":(n<0)?"Negativo":"Cero";
+    r2.innerText=r;
+
+    vista.innerHTML=`
+    <h3>🔢 Número analizado</h3>
+    <p>${r}</p>
+    <img class="img" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+    `;
+}
+
+function promedio(){
+    let p=prom.value;
+    let r;
+
+    if(p<10) r="Desaprobado";
+    else if(p<=13) r="Regular";
+    else if(p<=17) r="Bueno";
+    else r="Excelente";
+
+    r3.innerText=r;
+
+    vista.innerHTML=`
+    <h3>📊 Resultado académico</h3>
+    <p>${r}</p>
+    <img class="img" src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif">
+    `;
+}
+
+/* P3 */
+function edadF(){
+    let e=edad.value;
+    let r=(e>=13&&e<=17)?"Adolescente":"No";
+    r4.innerText=r;
+
+    vista.innerHTML=`
+    <h3>👦 Edad</h3>
+    <p>${r}</p>
+    <img class="img" src="https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif">
+    `;
+}
+
+function notaF(){
+    let n=nota.value;
+    let r=(n<10)?"Muy bajo":(n<=13)?"Regular":(n<=17)?"Bueno":"Excelente";
+    r5.innerText=r;
+
+    vista.innerHTML=`
+    <h3>📝 Nota</h3>
+    <p>${r}</p>
+    <img class="img" src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif">
+    `;
+}
+
+function mesF(){
+    let m=mes.value;
+    let meses=["","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    let r=meses[m]||"Inválido";
+    r6.innerText=r;
+
+    vista.innerHTML=`
+    <h3>📅 Mes</h3>
+    <p>${r}</p>
+    <img class="img" src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif">
+    `;
+}
+
+function calc(){
+    let a=parseFloat(n1.value);
+    let b=parseFloat(n2.value);
+    let op=document.getElementById("op").value;
+    let r;
+
+    switch(op){
+        case "+": r=a+b; break;
+        case "-": r=a-b; break;
+        case "*": r=a*b; break;
+        case "/": r=(b!=0)?a/b:"Error"; break;
+        default: r="Inválido";
+    }
+
+    r7.innerText="Resultado: "+r;
+
+    vista.innerHTML=`
+    <h3>🧮 Resultado</h3>
+    <p>${r}</p>
+    <img class="img" src="https://media.giphy.com/media/l0MYEqEzwMWFCg8rm/giphy.gif">
+    `;
+}
+
+function bisiesto(){
+    let y=anio.value;
+    let r=((y%4==0&&y%100!=0)||y%400==0)?"Bisiesto":"No";
+    r8.innerText=r;
+
+    vista.innerHTML=`
+    <h3>📆 Año</h3>
+    <p>${r}</p>
+    <img class="img" src="https://media.giphy.com/media/3o7aD4Vr0YV1Lh7Y6A/giphy.gif">
+    `;
+}
+</script>
+
+</body>
+</html>
