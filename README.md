@@ -1,1 +1,0 @@
-# evaluaci-n-continua-2.-semana-6
