@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Evaluación Continua 2</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial;
+    display:flex;
+    background: linear-gradient(135deg, #f6d365, #fda085);
+}
+
+/* MENU */
+.sidebar{
+    width:240px;
+    background: linear-gradient(#141e30, #243b55);
+    color:white;
+    height:100vh;
+    padding:15px;
+}
+
+.sidebar h2{
+    text-align:center;
+}
+
+.sidebar button{
+    width:100%;
+    padding:10px;
+    margin:6px 0;
+    border:none;
+    border-radius:8px;
+    background: linear-gradient(45deg, #ff6a00, #ee0979);
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.sidebar button:hover{
+    transform:scale(1.05);
+}
+
+/* CONTENIDO */
+.content{
+    flex:1;
+    padding:20px;
+}
+
+/* SECCIONES */
+.section{
+    display:none;
+}
+.active{
+    display:block;
+}
+
+/* TARJETAS MOSAICO */
+.card{
+    background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+
+.card:nth-child(2){ background: linear-gradient(135deg,#ff9a9e,#fad0c4);}
+.card:nth-child(3){ background: linear-gradient(135deg,#a18cd1,#fbc2eb);}
+.card:nth-child(4){ background: linear-gradient(135deg,#fbc2eb,#a6c1ee);}
+.card:nth-child(5){ background: linear-gradient(135deg,#fddb92,#d1fdff);}
+.card:nth-child(6){ background: linear-gradient(135deg,#84fab0,#8fd3f4);}
+
+.card:hover{
+    transform: translateY(-5px);
+}
+
+/* TITULOS */
+.card h3{
+    background: rgba(0,0,0,0.2);
+    padding:10px;
+    border-radius:8px;
+    color:white;
+}
+
+/* INPUTS */
+input{
+    padding:8px;
+    margin:5px;
+    border-radius:5px;
+    border:none;
+}
+
+/* BOTONES */
+button.action{
+    padding:8px 15px;
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button.action:hover{
+    transform:scale(1.05);
+}
+
+/* IMÁGENES */
+.img{
+    width:60px;
+    display:block;
+    margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MENU -->
+<div class="sidebar">
+<h2>🌈 PORTAL</h2>
+
+<button onclick="mostrar('inicio')">Inicio</button>
+<button onclick="mostrar('p1')">Pregunta 1</button>
+<button onclick="mostrar('p2')">Pregunta 2</button>
+<button onclick="mostrar('p3')">Pregunta 3</button>
+</div>
+
+<!-- CONTENIDO -->
+<div class="content">
+
+<!-- INICIO -->
+<div id="inicio" class="section active">
+<div class="card">
+<h3>🚀 Evaluación Continua 2</h3>
+<img class="img" src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
+<p><b>Portal interactivo con diseño visual tipo mosaico y enfoque pedagógico digital.</b></p>
+</div>
+</div>
+
+<!-- PREGUNTA 1 -->
+<div id="p1" class="section">
+<div class="card">
+<h3>📐 Área de un rectángulo</h3>
+<img class="img" src="https://cdn-icons-png.flaticon.com/512/2920/2920349.png">
+
+Base: <input type="number" id="base"><br>
+Altura: <input type="number" id="altura"><br><br>
+
+<button class="action" onclick="area()">Calcular</button>
+<p id="r1"></p>
+</div>
+</div>
+
+<!-- PREGUNTA 2 -->
+<div id="p2" class="section">
+
+<div class="card">
+<h3>🔢 Número: positivo, negativo o cero</h3>
+<img class="img" src="https://cdn-icons-png.flaticon.com/512/992/992651.png">
+
+<input type="number" id="num"><br><br>
+<button class="action" onclick="verificarNumero()">Verificar</button>
+<p id="r2"></p>
+</div>
+
+<div class="card">
+<h3>📊 Promedio del estudiante</h3>
+<img class="img" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+<input type="number" id="prom"><br><br>
+<button class="action" onclick="promedio()">Evaluar</button>
+<p id="r3"></p>
+</div>
+
+</div>
+
+<!-- PREGUNTA 3 -->
+<div id="p3" class="section">
+
+<div class="card">
+<h3>👦 Adolescente (13-17)</h3>
+<img class="img" src="https://cdn-icons-png.flaticon.com/512/194/194938.png">
+
+<input type="number" id="edad"><br><br>
+<button class="action" onclick="edad()">Verificar</button>
+<p id="r4"></p>
+</div>
+
+<div class="card">
+<h3>📝 Clasificación de nota</h3>
+<img class="img" src="https://cdn-icons-png.flaticon.com/512/190/190411.png">
+
+<input type="number" id="nota"><br><br>
+<button class="action" onclick="nota()">Evaluar</button>
+<p id="r5"></p>
+</div>
+
+<div class="card">
+<h3>📅 Mes del año</h3>
+<img class="img" src="https://cdn-icons-png.flaticon.com/512/747/747310.png">
+
+<input type="number" id="mes"><br><br>
+<button class="action" onclick="mes()">Mostrar</button>
+<p id="r6"></p>
+</div>
+
+<div class="card">
+<h3>🧮 Calculadora</h3>
+<img class="img" src="https://cdn-icons-png.flaticon.com/512/992/992700.png">
+
+<input type="number" id="n1"><br>
+<input type="number" id="n2"><br>
+<input type="text" id="op" placeholder="+ - * /"><br><br>
+
+<button class="action" onclick="calc()">Calcular</button>
+<p id="r7"></p>
+</div>
+
+<div class="card">
+<h3>📆 Año bisiesto</h3>
+<img class="img" src="https://cdn-icons-png.flaticon.com/512/747/747376.png">
+
+<input type="number" id="anio"><br><br>
+<button class="action" onclick="bisiesto()">Verificar</button>
+<p id="r8"></p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function mostrar(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+function area(){
+    let b=parseFloat(base.value);
+    let h=parseFloat(altura.value);
+    r1.innerText="Área: "+(b*h);
+}
+
+function verificarNumero(){
+    let n=parseFloat(num.value);
+    r2.innerText=(n>0)?"Positivo":(n<0)?"Negativo":"Cero";
+}
+
+function promedio(){
+    let p=parseFloat(prom.value);
+    r3.innerText=(p<10)?"Desaprobado":(p<=13)?"Regular":(p<=17)?"Bueno":"Excelente";
+}
+
+function edad(){
+    let e=parseInt(edad.value);
+    r4.innerText=(e>=13&&e<=17)?"Adolescente":"No adolescente";
+}
+
+function nota(){
+    let n=parseFloat(nota.value);
+    r5.innerText=(n<10)?"Muy bajo":(n<=13)?"Regular":(n<=17)?"Bueno":"Excelente";
+}
+
+function mes(){
+    let m=parseInt(mes.value);
+    let meses=["","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    r6.innerText=meses[m]||"Inválido";
+}
+
+function calc(){
+    let a=parseFloat(n1.value);
+    let b=parseFloat(n2.value);
+    let op=document.getElementById("op").value;
+    let r;
+    switch(op){
+        case "+": r=a+b; break;
+        case "-": r=a-b; break;
+        case "*": r=a*b; break;
+        case "/": r=(b!=0)?a/b:"Error"; break;
+        default: r="Inválido";
+    }
+    r7.innerText="Resultado: "+r;
+}
+
+function bisiesto(){
+    let y=parseInt(anio.value);
+    r8.innerText=((y%4==0&&y%100!=0)||y%400==0)?"Bisiesto":"No bisiesto";
+}
+</script>
+
+</body>
+</html>
